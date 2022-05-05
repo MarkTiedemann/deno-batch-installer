@@ -4,22 +4,15 @@
 
 ## Usage
 
-Install a specific version:
+Install a specific version (e.g. v1.21.1):
 
 ```batch
 curl -fsS https://batch-installer.deno.dev/v1.21.1 | powershell -c cmd /c $input
 ```
 
-Install latest version:
+Example output:
 
 ```batch
-curl -fsS https://batch-installer.deno.dev | powershell -c cmd /c $input
-```
-
-## Example
-
-```batch
-C:\> curl -fsS https://batch-installer.deno.dev/v1.21.1 | powershell -c cmd /c $input
 curl -o deno.zip https://dl.deno.land/release/v1.21.1/deno-x86_64-pc-windows-msvc.zip
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
