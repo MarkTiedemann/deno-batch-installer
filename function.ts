@@ -15,28 +15,26 @@ function buildCommand(version: string): string {
 	return inlined;
 }
 
-function determineMediaType(req: Request): "text/plain" | "text/html" {
+function determineMediaType(req: Request): string {
 	const accept = req.headers.get("accept");
 	if (accept === null) {
 		return "text/plain";
 	}
-	return mediaType(accept, ["text/plain", "text/html"]) as "text/plain" | "text/html";
+	return mediaType(accept, ["text/plain", "text/html"]);
 }
 
 function handler(req: Request): Response {
 	switch (determineMediaType(req)) {
-		case "text/html": {
+		case "text/html":
 			return Response.redirect("https://github.com/MarkTiedemann/deno-batch-installer");
-		}
-		case "text/plain": {
+		case "text/plain":
+		default:
 			const pathname = new URL(req.url).pathname;
 			const match = pathname.match(/^\/(v\d+\.\d+\.\d+)\/?$/);
 			if (match === null) {
 				return new Response("No version specified", { status: 400 });
-			} else {
-				return new Response(buildCommand(match[1]));
 			}
-		}
+			return new Response(buildCommand(match[1]));
 	}
 }
 
